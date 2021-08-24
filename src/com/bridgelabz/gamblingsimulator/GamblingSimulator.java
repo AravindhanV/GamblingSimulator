@@ -8,10 +8,10 @@ public class GamblingSimulator {
 	
 	public static void main(String[] args) {
 		int currentBalance = DAILY_STAKE;
-		currentBalance = simulateBet(currentBalance);
+		currentBalance = play(currentBalance);
 	}
 	
-	public static int simulateBet(int currentBalance) {
+	public static int play(int currentBalance) {
 		int randomNumber = (int)Math.floor(Math.random() * 2);
 		
 		if(randomNumber == 0) {
