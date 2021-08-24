@@ -14,7 +14,7 @@ public class GamblingSimulator {
 			while (dailyAmount > 0.5 * DAILY_STAKE && dailyAmount < 1.5 * DAILY_STAKE) {
 				dailyAmount = play(dailyAmount);
 			}
-//			System.out.println(dailyAmount);
+			
 			currentBalance += dailyAmount;
 		}
 		calculateGainOrLoss(currentBalance);
