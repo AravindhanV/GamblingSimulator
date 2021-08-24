@@ -1,5 +1,7 @@
 package com.bridgelabz.gamblingsimulator;
 
+import java.util.ArrayList;
+
 public class GamblingSimulator {
 	static final int DAILY_STAKE = 100;
 	static final int BET_EVERY_GAME = 1;
@@ -9,20 +11,38 @@ public class GamblingSimulator {
 
 	public static void main(String[] args) {
 		int currentBalance = 0;
+		ArrayList<Integer> gainDays = new ArrayList<>();
+		ArrayList<Integer> lossDays = new ArrayList<>();
+		
 		for(int day=0;day<NO_OF_DAYS;day++) {
 			int dailyAmount = DAILY_STAKE;
 			while (willContinueGamble(dailyAmount)) {
 				dailyAmount = play(dailyAmount);
 			}
-			calculateDailyGainorLoss(dailyAmount, day);
+			boolean isGain = calculateDailyGainorLoss(dailyAmount, day);
+			
+			if(isGain) {
+				gainDays.add(day+1);
+			} else {
+				lossDays.add(day+1);
+			}
 			currentBalance += dailyAmount;
 		}
 		calculateTotalGainOrLoss(currentBalance);
+		System.out.println("The lucky days are:");
+		for(int item : gainDays) {
+			System.out.print(item+" ");
+		}
+		System.out.println("\nThe unlucky days are:");
+		for(int item : lossDays) {
+			System.out.print(item+" ");
+		}
 	}
 	
-	public static void calculateDailyGainorLoss(int dailyAmount,int day) {
+	public static boolean calculateDailyGainorLoss(int dailyAmount,int day) {
 		int dailyNet = dailyAmount-DAILY_STAKE;
 		System.out.println("$"+(dailyNet>0?dailyNet:-dailyNet)+" "+(dailyNet>0?"Gained":"Lost")+" on day "+(day+1));
+		return dailyNet>0;
 	}
 	
 	public static void calculateTotalGainOrLoss(int currentBalance) {
