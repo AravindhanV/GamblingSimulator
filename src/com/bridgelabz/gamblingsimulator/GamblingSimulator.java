@@ -14,13 +14,18 @@ public class GamblingSimulator {
 			while (willContinueGamble(dailyAmount)) {
 				dailyAmount = play(dailyAmount);
 			}
-			
+			calculateDailyGainorLoss(dailyAmount, day);
 			currentBalance += dailyAmount;
 		}
-		calculateGainOrLoss(currentBalance);
+		calculateTotalGainOrLoss(currentBalance);
 	}
 	
-	public static void calculateGainOrLoss(int currentBalance) {
+	public static void calculateDailyGainorLoss(int dailyAmount,int day) {
+		int dailyNet = dailyAmount-DAILY_STAKE;
+		System.out.println("$"+(dailyNet>0?dailyNet:-dailyNet)+" "+(dailyNet>0?"Gained":"Lost")+" on day "+(day+1));
+	}
+	
+	public static void calculateTotalGainOrLoss(int currentBalance) {
 		int netChange = currentBalance-(NO_OF_DAYS * DAILY_STAKE);
 		System.out.println("Total amount won or lost = $"+(netChange>0?netChange:-netChange)+" "+(netChange>0?"Gained":"Lost"));
 	}
