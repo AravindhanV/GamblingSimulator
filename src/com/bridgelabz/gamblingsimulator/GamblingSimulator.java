@@ -11,7 +11,7 @@ public class GamblingSimulator {
 		int currentBalance = 0;
 		for(int day=0;day<NO_OF_DAYS;day++) {
 			int dailyAmount = DAILY_STAKE;
-			while (dailyAmount > 0.5 * DAILY_STAKE && dailyAmount < 1.5 * DAILY_STAKE) {
+			while (willContinueGamble(dailyAmount)) {
 				dailyAmount = play(dailyAmount);
 			}
 			
@@ -23,6 +23,10 @@ public class GamblingSimulator {
 	public static void calculateGainOrLoss(int currentBalance) {
 		int netChange = currentBalance-(NO_OF_DAYS * DAILY_STAKE);
 		System.out.println("Total amount won or lost = $"+(netChange>0?netChange:-netChange)+" "+(netChange>0?"Gained":"Lost"));
+	}
+	
+	public static boolean willContinueGamble(int dailyAmount) {
+		return dailyAmount > 0.5 * DAILY_STAKE && dailyAmount < 1.5 * DAILY_STAKE;
 	}
 
 	public static int play(int currentBalance) {
